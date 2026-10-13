@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>每月内容比例规划</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">▦</span><span>每月内容比例规划</span></div>
+    <nav><button class="nav-button active" data-view="form">填写规划</button><button class="nav-button" data-view="summary">数据汇总</button></nav>
+    <span class="save-status" id="saveStatus">数据实时保存</span>
+  </header>
+
+  <main class="shell">
+    <section id="formView" class="view active-view">
+      <div class="intro"><p class="eyebrow">MONTHLY PLANNING</p><h1>每月内容比例规划</h1><p>选择规划月份，预填各类内容的计划比例。保存后，团队可以在汇总页共同查看。</p></div>
+      <form id="planningForm" class="card">
+        <div class="form-grid">
+          <label>规划月份<span class="required">*</span><input type="month" id="month" required></label>
+          <label>编导小组<span class="required">*</span><input id="group" list="groupOptions" placeholder="例如：A组 / 母婴组" required><datalist id="groupOptions"></datalist></label>
+          <label>编导姓名<span class="required">*</span><input id="planner" placeholder="填写姓名" required></label>
+        </div>
+        <div class="section-head"><div><h2>内容比例</h2><p>填写各内容类型的计划占比，备注可选。</p></div><button type="button" class="secondary" id="addRow">＋ 添加内容类型</button></div>
+        <div class="planning-table"><div class="table-head"><span>内容类型</span><span>规划比例</span><span>备注</span><span></span></div><div id="rows"></div></div>
+        <div class="form-footer"><div class="total-wrap"><span>当前合计</span><strong id="totalRatio">0%</strong><span id="totalHint">还可以规划 100%</span></div><button class="primary" type="submit">保存本月规划</button></div>
+        <p class="form-message" id="formMessage" role="status"></p>
+      </form>
+    </section>
+
+    <section id="summaryView" class="view">
+      <div class="summary-heading"><div><p class="eyebrow">SHARED SUMMARY</p><h1>规划汇总与可视化</h1><p>按月份、按小组查看单个规划，或同时对比多组数据。</p></div><button class="secondary" id="refreshSummary">↻ 刷新数据</button></div>
+      <div class="filters card"><label>月份<select id="monthFilter"><option value="">全部月份</option></select></label><label>小组<select id="groupFilter"><option value="">全部小组</option></select></label><label>对比维度<select id="compareDimension"><option value="group">按小组对比</option><option value="month">按月份对比</option></select></label><label class="compare-toggle"><input type="checkbox" id="compareMode"> 对比模式</label></div>
+      <div id="summaryContent"><div class="empty-state">还没有规划数据，先填写一份吧。</div></div>
+    </section>
+  </main>
+  <template id="rowTemplate"><div class="planning-row"><input class="category" placeholder="例如：测评、教程、种草"><div class="ratio-input"><input class="ratio" type="number" min="0" max="100" step="0.1" placeholder="0"><span>%</span></div><input class="note" placeholder="可选"><button type="button" class="remove-row" aria-label="删除这一行">×</button></div></template>
+  <script src="/app.js" defer></script>
+</body>
+</html>

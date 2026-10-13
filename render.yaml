@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: monthly-content-planning
+    runtime: node
+    plan: starter
+    buildCommand: "node --check server.js"
+    startCommand: "node server.js"
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+    disk:
+      name: monthly-content-data
+      mountPath: /var/data
+      sizeGB: 1
